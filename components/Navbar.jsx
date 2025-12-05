@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Phone } from 'lucide-react';
+import sitLogo from '../assets/sitLogo.jpg'
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,7 +28,7 @@ const Navbar = () => {
           {/* Left: Logo */}
           <div className="flex-1 flex justify-start transition-all duration-500 ">
              <img 
-               src="https://defencehabitat-tapasihalli.defencehousingsociety.com/assets/logo%20(1)-CaK3gJYe.webp" 
+               src={sitLogo}
                alt="DHS Logo" 
                className={`object-contain transition-all duration-500 ${isScrolled ? 'h-14 w-14' : 'h-20 w-20'}`}
                onError={(e) => e.currentTarget.src='https://via.placeholder.com/150/0f3460/ffffff?text=DHS'} 
@@ -55,8 +56,8 @@ const Navbar = () => {
                 <Phone size={isScrolled ? 18 : 22} fill="currentColor" />
              </div>
              <div className="flex flex-col">
-                <a href="tel:+918884735735" className={`font-sans font-bold text-navy-900 leading-none hover:text-[#e91e63] transition-all duration-500 whitespace-nowrap ${isScrolled ? 'text-lg lg:text-xl' : 'text-xl lg:text-2xl'}`}>
-                  +91-8884 735 735
+                <a href="tel:+918188992266 " className={`font-sans font-bold text-navy-900 leading-none hover:text-[#e91e63] transition-all duration-500 whitespace-nowrap ${isScrolled ? 'text-lg lg:text-xl' : 'text-xl lg:text-2xl'}`}>
+                  +91 8188992266 
                 </a>
              </div>
           </div>
@@ -66,16 +67,16 @@ const Navbar = () => {
       {/* Mobile Header - Compact */}
       <div className={`md:hidden w-full py-2 px-4 flex justify-between items-center border-b border-slate-200 z-[100] sticky top-0 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-white shadow-sm'}`}>
           <div className="flex items-center gap-2">
-            <img src="/logo.png" alt="DHS Logo" className="h-12 w-12 object-contain" onError={(e) => e.currentTarget.src='https://via.placeholder.com/100?text=DHS'}/>
-            <div className="flex flex-col">
-              <span className="font-condensed font-bold text-navy-900 text-sm leading-tight">DEFENCE HABITAT</span>
-              <h2 className="text-navy-900 font-bold mt-1 text-center font-serif leading-tight transition-all duration-500">
-              ಡಿಫೆನ್ಸ್ ಹ್ಯಾಬಿಟಾಟ್
+            <img src={sitLogo} alt="DHS Logo" className="h-12 w-12 object-contain" onError={(e) => e.currentTarget.src='https://via.placeholder.com/100?text=DHS'}/>
+            <div className="flex flex-col text-center">
+              <span className="font-condensed font-bold text-navy-900 text-[10px] leading-tight">DEFENCE HABITAT HOUSING CO-OPERATIVE SOCIETY LTD.</span>
+              <h2 className="text-navy-900 font-bold text-[8px] mt-1 text-center font-serif leading-tight transition-all duration-500">
+               ಡಿಫೆನ್ಸ್ ಹ್ಯಾಬಿಟಾಟ್ ಹೌಸಿಂಗ್ ಕೋ-ಆಪರೇಟಿವ್ ಸೊಸೈಟಿ ಲಿ.
             </h2>
               <span className="text-[10px] text-red-600 font-bold leading-tight">Reg No: HSG-3/64/HHS/53744</span>
             </div>
           </div>
-          <a href="tel:+918884735735" className="text-white bg-[#e91e63] p-2 rounded-full shadow-sm active:scale-95 transition-transform">
+          <a href="tel:+918188992266 " className="text-white bg-[#e91e63] p-2 rounded-full shadow-sm active:scale-95 transition-transform">
             <Phone size={20} fill="currentColor" />
           </a>
       </div>
