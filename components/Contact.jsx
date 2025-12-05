@@ -123,13 +123,41 @@ const Contact = () => {
               </div>
             </div>
             {/* phone, timings, email blocks ... */}
+                 <div className="flex items-start gap-4">
+              <div className="bg-white p-3 shadow-md rounded-full text-gold-400">
+                <Phone size={24} />
+              </div>
+              <div>
+                <h4 className="text-navy-900 font-bold text-lg">Call Us</h4>
+                <p className="text-slate-600">+91-8188992266</p>
+                {/* <p className="text-slate-600">+91-8188992266</p> */}
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="bg-white p-3 shadow-md rounded-full text-gold-400">
+                <Clock size={24} />
+              </div>
+              <div>
+                <h4 className="text-navy-900 font-bold text-lg">Office Timings</h4>
+                <p className="text-slate-600">Wednesday to Monday: 9:30 AM - 6:30 PM</p>
+                <p className="text-red-500 text-sm">Weekly Off: Tuesday</p>
+              </div>
+            </div>
+            
+             <div className="flex items-start gap-4">
+              {/* <div className="bg-white p-3 shadow-md rounded-full text-gold-400">
+                <Mail size={24} />
+              </div> */}
             <div className="flex items-start gap-4">
               <div className="bg-white p-3 shadow-md rounded-full text-gold-400">
                 <Mail size={24} />
               </div>
               <div>
-                <h4 className="text-navy-900 font-bold text-lg">Email</h4>
+                 <h4 className="text-navy-900 font-bold text-lg">Email</h4>
                 <p className="text-slate-600">info.raj@defencehousingsociety.com</p>
+                </div>
+               
               </div>
             </div>
           </div>
