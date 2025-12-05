@@ -114,11 +114,11 @@ const Contact = () => {
               <div>
                 <h4 className="text-navy-900 font-bold text-lg">Visit Us</h4>
                 <p className="text-slate-600">
-                  Defence Habitat Housing Co-Operative Society Ltd.
+                 Kowdi, 2nd floor, Rajavruksha Groups, 35A,
                   <br />
-                  Behind Swathi Garden Hotel, E Block, Sahakarnagar,
-                  <br />
-                  Bangalore - 560092
+                  1st Main Rd, Chiranjeevi Layout, Hebbal
+                 <br />
+                   Kempapura, Bengaluru - 560024
                 </p>
               </div>
             </div>
@@ -273,7 +273,7 @@ const Contact = () => {
       <div className="mt-16 w-full h-80 md:h-96 bg-slate-200 rounded-sm overflow-hidden shadow-xl border-4 border-white relative group">
         <iframe
           title="Defence Habitat Location"
-          src="https://maps.google.com/maps?q=Defence%20Habitat%20Housing%20Co-Operative%20Society%20Ltd%2C%20Sahakarnagar&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          src="https://www.google.com/maps?q=Kowdi%2C%202nd%20floor%2C%20Rajavruksha%20Groups%2C%2035A%2C%201st%20Main%20Rd%2C%20Chiranjeevi%20Layout%2C%20Hebbal%20Kempapura%2C%20Bengaluru&output=embed"
           width="100%"
           height="100%"
           style={{ border: 0 }}
