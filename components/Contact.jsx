@@ -2,28 +2,53 @@ import React, { useState } from "react";
 import Section from "./Section";
 import { Phone, Mail, Clock, MapPin, Send, Map as MapIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Contact = () => {
   const [isMapInteractive, setIsMapInteractive] = useState(false);
 
   // form state
   const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
+    // firstName: "",
+    // lastName: "",
+    name: "",
     email: "",
     phone: "",
     message: "",
   });
 
   const [status, setStatus] = useState({ loading: false, ok: null, msg: "" });
+  const [captchaValue, setCaptchaValue] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((s) => ({ ...s, [name]: value }));
   };
 
+  // const validate = () => {
+  //   if (!form.firstName.trim() || !form.email.trim() || !form.message.trim()) {
+  //     setStatus({
+  //       loading: false,
+  //       ok: false,
+  //       msg: "Please fill required fields.",
+  //     });
+  //     return false;
+  //   }
+  //   // basic email check
+  //   const re = /\S+@\S+\.\S+/;
+  //   if (!re.test(form.email)) {
+  //     setStatus({
+  //       loading: false,
+  //       ok: false,
+  //       msg: "Please enter a valid email.",
+  //     });
+  //     return false;
+  //   }
+  //   return true;
+  // };
+
   const validate = () => {
-    if (!form.firstName.trim() || !form.email.trim() || !form.message.trim()) {
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       setStatus({
         loading: false,
         ok: false,
@@ -31,7 +56,7 @@ const Contact = () => {
       });
       return false;
     }
-    // basic email check
+
     const re = /\S+@\S+\.\S+/;
     if (!re.test(form.email)) {
       setStatus({
@@ -41,6 +66,16 @@ const Contact = () => {
       });
       return false;
     }
+
+    if (!captchaValue) {
+      setStatus({
+        loading: false,
+        ok: false,
+        msg: "Please verify that you are not a robot.",
+      });
+      return false;
+    }
+
     return true;
   };
 
@@ -56,12 +91,18 @@ const Contact = () => {
       // otherwise use '/dhsChethan-email-contact'
       const endpoint =
         // "http://localhost:4000/dhs-tapasihalli-new-chethan/dhsChethan-email-contact";
-        "https://adminpanel.defencehousingsociety.com/dhs-tapasihalli-new-chethan/dhsChethan-email-contact"; // change if needed
+        // "https://adminpanel.defencehousingsociety.com/dhs-tapasihalli-new-chethan/dhsChethan-email-contact"; // change if needed
+        "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus";
+      // "http://localhost:4000/defenceWebsiteRoutes/contactus";
 
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          source: "tapasihalli landing page",
+          captchaValue,
+        }),
       });
 
       const data = await res.json();
@@ -72,12 +113,14 @@ const Contact = () => {
           msg: "Message sent. Thank you!",
         });
         setForm({
-          firstName: "",
-          lastName: "",
+          // firstName: "",
+          // lastName: "",
+          name: "",
           email: "",
           phone: "",
           message: "",
         });
+        setCaptchaValue(null);
       } else {
         throw new Error(data?.message || "Failed to send");
       }
@@ -114,22 +157,25 @@ const Contact = () => {
               <div>
                 <h4 className="text-navy-900 font-bold text-lg">Visit Us</h4>
                 <p className="text-slate-600">
-                 Kowdi, 2nd floor, Rajavruksha Groups, 35A,
+                  Behind Swathi Gardenia Hotel
+                  {/* Kowdi, 2nd floor, Rajavruksha Groups, 35A, */}
                   <br />
-                  1st Main Rd, Chiranjeevi Layout, Hebbal
-                 <br />
-                   Kempapura, Bengaluru - 560024
+                  Sahakarnagar E Block
+                  {/* 1st Main Rd, Chiranjeevi Layout, Hebbal */}
+                  <br />
+                  Bangalore - 560092
+                  {/* Kempapura, Bengaluru - 560024 */}
                 </p>
               </div>
             </div>
             {/* phone, timings, email blocks ... */}
-                 <div className="flex items-start gap-4">
+            <div className="flex items-start gap-4">
               <div className="bg-white p-3 shadow-md rounded-full text-gold-400">
                 <Phone size={24} />
               </div>
               <div>
                 <h4 className="text-navy-900 font-bold text-lg">Call Us</h4>
-                <p className="text-slate-600">+91-8188992266</p>
+                <p className="text-slate-600">+91-8884735735</p>
                 {/* <p className="text-slate-600">+91-8188992266</p> */}
               </div>
             </div>
@@ -139,25 +185,31 @@ const Contact = () => {
                 <Clock size={24} />
               </div>
               <div>
-                <h4 className="text-navy-900 font-bold text-lg">Office Timings</h4>
-                <p className="text-slate-600">Wednesday to Monday: 9:30 AM - 6:30 PM</p>
+                <h4 className="text-navy-900 font-bold text-lg">
+                  Office Timings
+                </h4>
+                <p className="text-slate-600">
+                  Wednesday to Monday: 9:30 AM - 6:30 PM
+                </p>
                 <p className="text-red-500 text-sm">Weekly Off: Tuesday</p>
               </div>
             </div>
-            
-             <div className="flex items-start gap-4">
+
+            <div className="flex items-start gap-4">
               {/* <div className="bg-white p-3 shadow-md rounded-full text-gold-400">
                 <Mail size={24} />
               </div> */}
-            <div className="flex items-start gap-4">
-              <div className="bg-white p-3 shadow-md rounded-full text-gold-400">
-                <Mail size={24} />
-              </div>
-              <div>
-                 <h4 className="text-navy-900 font-bold text-lg">Email</h4>
-                <p className="text-slate-600">info.raj@defencehousingsociety.com</p>
+              <div className="flex items-start gap-4">
+                <div className="bg-white p-3 shadow-md rounded-full text-gold-400">
+                  <Mail size={24} />
                 </div>
-               
+                <div>
+                  <h4 className="text-navy-900 font-bold text-lg">Email</h4>
+                  <p className="text-slate-600">
+                    {/* info.raj@defencehousingsociety.com */}
+                    mail@defencehousingsociety.com
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -174,45 +226,15 @@ const Contact = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">
-                    First Name*
+                    Name*
                   </label>
                   <input
-                    name="firstName"
-                    value={form.firstName}
+                    name="name"
+                    value={form.name}
                     onChange={handleChange}
                     type="text"
                     className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-sm focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none transition-all"
                     placeholder="John"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
-                    Last Name
-                  </label>
-                  <input
-                    name="lastName"
-                    value={form.lastName}
-                    onChange={handleChange}
-                    type="text"
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-sm focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none transition-all"
-                    placeholder="Doe"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
-                    Email Address*
-                  </label>
-                  <input
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    type="email"
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-sm focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none transition-all"
-                    placeholder="john@example.com"
                     required
                   />
                 </div>
@@ -229,6 +251,36 @@ const Contact = () => {
                     placeholder="+91 98765 43210"
                   />
                 </div>
+                {/* <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                    Last Name
+                  </label>
+                  <input
+                    name="lastName"
+                    value={form.lastName}
+                    onChange={handleChange}
+                    type="text"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-sm focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none transition-all"
+                    placeholder="Doe"
+                  />
+                </div> */}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                    Email Address*
+                  </label>
+                  <input
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    type="email"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-sm focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none transition-all"
+                    placeholder="john@example.com"
+                    required
+                  />
+                </div>
               </div>
 
               <div>
@@ -243,6 +295,13 @@ const Contact = () => {
                   className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-sm focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none transition-all"
                   placeholder="I'm interested in this project..."
                   required
+                />
+              </div>
+              <div className="flex justify-center">
+                <ReCAPTCHA
+                  sitekey="6LfarqkrAAAAAFUBBVCodI4OdoTheC6uB1hdtITz"
+                  onChange={(token) => setCaptchaValue(token)}
+                  onExpired={() => setCaptchaValue(null)}
                 />
               </div>
 
