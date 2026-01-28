@@ -15,14 +15,23 @@ const Contact = () => {
     email: "",
     phone: "",
     message: "",
+    acceptTerms: false,
   });
 
   const [status, setStatus] = useState({ loading: false, ok: null, msg: "" });
   const [captchaValue, setCaptchaValue] = useState(null);
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setForm((s) => ({ ...s, [name]: value }));
+  // };
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((s) => ({ ...s, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setForm((s) => ({
+      ...s,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   };
 
   // const validate = () => {
@@ -53,6 +62,15 @@ const Contact = () => {
         loading: false,
         ok: false,
         msg: "Please fill required fields.",
+      });
+      return false;
+    }
+
+    if (!form.acceptTerms) {
+      setStatus({
+        loading: false,
+        ok: false,
+        msg: "Please accept Terms & Conditions and Privacy Policy",
       });
       return false;
     }
@@ -303,6 +321,37 @@ const Contact = () => {
                   onChange={(token) => setCaptchaValue(token)}
                   onExpired={() => setCaptchaValue(null)}
                 />
+              </div>
+
+              <div className="flex items-start gap-2">
+                <input
+                  type="checkbox"
+                  name="acceptTerms"
+                  checked={form.acceptTerms}
+                  onChange={handleChange}
+                  className="mt-1 h-4 w-4 text-gold-400 border-slate-300 focus:ring-gold-400"
+                />
+
+                <p className="text-sm text-slate-600">
+                  I accept the{" "}
+                  <a
+                    href="https://defencehousingsociety.com/terms-conditions"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-navy-900 font-semibold underline hover:text-gold-400"
+                  >
+                    Terms & Conditions
+                  </a>{" "}
+                  and{" "}
+                  <a
+                    href="https://defencehousingsociety.com/privacy-policy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-navy-900 font-semibold underline hover:text-gold-400"
+                  >
+                    Privacy Policy
+                  </a>
+                </p>
               </div>
 
               <button
