@@ -24,7 +24,7 @@ const Pricing = () => {
             </tr>
           </thead>
           
-          <tbody className="divide-y divide-slate-100">
+          {/* <tbody className="divide-y divide-slate-100">
           <tr className="hover:bg-slate-50 transition-colors">
             <td className="px-6 py-4 font-bold text-navy-900">30 x 40</td>
             <td className="px-6 py-4">₹1,399</td>
@@ -54,6 +54,37 @@ const Pricing = () => {
     <td className="px-6 py-4">₹6,71,520</td>
     <td className="px-6 py-4">₹6,71,520</td>
   </tr>
+          </tbody> */}
+          <tbody className="divide-y divide-slate-100">
+            <tr className="hover:bg-slate-50 transition-colors">
+              <td className="px-6 py-4 font-bold text-navy-900">30 x 40</td>
+              <td className="px-6 py-4">₹1,699</td>
+              <td className="px-6 py-4 font-bold text-navy-900 bg-slate-50">₹20,38,800</td>
+              <td className="px-6 py-4 font-medium">₹6,11,640</td>
+              <td className="px-6 py-4">₹6,11,640</td>
+              <td className="px-6 py-4">₹4,07,760</td>
+              <td className="px-6 py-4">₹4,07,760</td>
+            </tr>
+
+            <tr className="hover:bg-slate-50 transition-colors">
+              <td className="px-6 py-4 font-bold text-navy-900">30 x 50</td>
+              <td className="px-6 py-4">₹1,699</td>
+              <td className="px-6 py-4 font-bold text-navy-900 bg-slate-50">₹25,48,500</td>
+              <td className="px-6 py-4 font-medium">₹7,64,550</td>
+              <td className="px-6 py-4">₹7,64,550</td>
+              <td className="px-6 py-4">₹5,09,700</td>
+              <td className="px-6 py-4">₹5,09,700</td>
+            </tr>
+
+            <tr className="hover:bg-slate-50 transition-colors">
+              <td className="px-6 py-4 font-bold text-navy-900">40 x 60</td>
+              <td className="px-6 py-4">₹1,699</td>
+              <td className="px-6 py-4 font-bold text-navy-900 bg-slate-50">₹40,77,600</td>
+              <td className="px-6 py-4 font-medium">₹12,23,280</td>
+              <td className="px-6 py-4">₹12,23,280</td>
+              <td className="px-6 py-4">₹8,15,520</td>
+              <td className="px-6 py-4">₹8,15,520</td>
+            </tr>
           </tbody>
 
         </table>
