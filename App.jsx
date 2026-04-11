@@ -8,11 +8,13 @@ import Pricing from './components/Pricing';
 import Community from './components/Community';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ContactFormPopup from './components/ContactFormPopup';
 
 function App() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-gold-400 selection:text-navy-900">
       <Navbar />
+      <ContactFormPopup />
       <main>
         <Hero />
         <Location />
