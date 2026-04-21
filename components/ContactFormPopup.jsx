@@ -1,8 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FiUser, FiMail, FiMessageSquare, FiX, FiCheckCircle } from 'react-icons/fi';
+import React, { useState, useEffect, useRef } from "react";
+import {
+  FiUser,
+  FiMail,
+  FiMessageSquare,
+  FiX,
+  FiCheckCircle,
+} from "react-icons/fi";
 import { CiPhone } from "react-icons/ci";
-import toast from 'react-hot-toast';
-import { FaPaperPlane } from 'react-icons/fa';
+import toast from "react-hot-toast";
+import { FaPaperPlane } from "react-icons/fa";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const ContactFormPopup = () => {
@@ -41,7 +47,7 @@ const ContactFormPopup = () => {
     } else {
       let processedValue = value;
       if (name === "phone") {
-        processedValue = value.replace(/\D/g, '').slice(0, 10);
+        processedValue = value.replace(/\D/g, "").slice(0, 10);
         if (phoneError) setPhoneError("");
       }
       setFormData((prev) => ({ ...prev, [name]: processedValue }));
@@ -50,7 +56,8 @@ const ContactFormPopup = () => {
 
   const validatePhoneNumber = (phone) => {
     if (!phone) return "Phone number is required";
-    if (!/^\d{10}$/.test(phone)) return "Phone number must be exactly 10 digits";
+    if (!/^\d{10}$/.test(phone))
+      return "Phone number must be exactly 10 digits";
     return "";
   };
 
@@ -112,6 +119,7 @@ const ContactFormPopup = () => {
       phone: formData.phone,
       message: formData.message.trim(),
       acceptTerms,
+      declaration: acceptTerms,
       source: "Tapasihalli landing page",
       captchaValue,
       uniqueId,
@@ -126,7 +134,7 @@ const ContactFormPopup = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        }
+        },
       );
 
       if (res.ok) {
@@ -173,13 +181,18 @@ const ContactFormPopup = () => {
 
       {/* Popup */}
       {showPopup && (
-        <div className={`bg-white rounded-xl shadow-xl w-80 ${isClosing ? 'animate-slideOut' : 'animate-slideIn'}`}>
+        <div
+          className={`bg-white rounded-xl shadow-xl w-80 ${isClosing ? "animate-slideOut" : "animate-slideIn"}`}
+        >
           {/* Header */}
           <div className="flex justify-between p-4 bg-gradient-to-r from-[#24447c] to-blue-600 rounded-t-xl">
             <h2 className="text-white font-semibold">
               {submissionSuccess ? "Thank You!" : "Contact Us"}
             </h2>
-            <FiX className="text-white cursor-pointer text-xl" onClick={handleClose} />
+            <FiX
+              className="text-white cursor-pointer text-xl"
+              onClick={handleClose}
+            />
           </div>
 
           {/* Body: Show success message or form */}
@@ -187,11 +200,16 @@ const ContactFormPopup = () => {
             {submissionSuccess ? (
               <div className="text-center py-4">
                 <FiCheckCircle className="text-green-500 text-5xl mx-auto mb-3" />
-                <p className="text-gray-800 font-medium">Your message was sent successfully!</p>
-                <p className="text-sm text-gray-500 mt-2">
-                  Reference ID: <span className="font-mono font-bold">{submissionId}</span>
+                <p className="text-gray-800 font-medium">
+                  Your message was sent successfully!
                 </p>
-                <p className="text-xs text-gray-400 mt-3">Closing in 3 seconds...</p>
+                <p className="text-sm text-gray-500 mt-2">
+                  Reference ID:{" "}
+                  <span className="font-mono font-bold">{submissionId}</span>
+                </p>
+                <p className="text-xs text-gray-400 mt-3">
+                  Closing in 3 seconds...
+                </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -231,10 +249,12 @@ const ContactFormPopup = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="Phone (10 digits)"
-                    className={`w-full pl-10 py-2 border rounded ${phoneError ? 'border-red-500' : ''}`}
+                    className={`w-full pl-10 py-2 border rounded ${phoneError ? "border-red-500" : ""}`}
                     required
                   />
-                  {phoneError && <p className="text-red-500 text-xs mt-1">{phoneError}</p>}
+                  {phoneError && (
+                    <p className="text-red-500 text-xs mt-1">{phoneError}</p>
+                  )}
                 </div>
 
                 {/* Message */}
@@ -270,8 +290,25 @@ const ContactFormPopup = () => {
                     className="mr-1 mt-1"
                   />
                   <p className="text-xs text-gray-600">
-                    I accept the <a href="https://defencehousingsociety.com/terms-conditions" target="_blank" rel="noopener noreferrer" className="font-semibold underline">Terms</a> & 
-                    <a href="https://defencehousingsociety.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="font-semibold underline"> Privacy Policy</a>
+                    I accept the{" "}
+                    <a
+                      href="https://defencehousingsociety.com/terms-conditions"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold underline"
+                    >
+                      Terms
+                    </a>{" "}
+                    &
+                    <a
+                      href="https://defencehousingsociety.com/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold underline"
+                    >
+                      {" "}
+                      Privacy Policy
+                    </a>
                   </p>
                 </div>
 
@@ -290,15 +327,31 @@ const ContactFormPopup = () => {
       )}
 
       <style jsx global>{`
-        .animate-slideIn { animation: slideIn 0.5s forwards; }
-        .animate-slideOut { animation: slideOut 0.5s forwards; }
+        .animate-slideIn {
+          animation: slideIn 0.5s forwards;
+        }
+        .animate-slideOut {
+          animation: slideOut 0.5s forwards;
+        }
         @keyframes slideIn {
-          from { transform: translateX(100%); opacity: 0; }
-          to { transform: translateX(0); opacity: 1; }
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
         }
         @keyframes slideOut {
-          from { transform: translateX(0); opacity: 1; }
-          to { transform: translateX(100%); opacity: 0; }
+          from {
+            transform: translateX(0);
+            opacity: 1;
+          }
+          to {
+            transform: translateX(100%);
+            opacity: 0;
+          }
         }
       `}</style>
     </div>

@@ -120,6 +120,7 @@ const Contact = () => {
           ...form,
           source: "tapasihalli landing page",
           captchaValue,
+          declaration: form.acceptTerms,
         }),
       });
 
